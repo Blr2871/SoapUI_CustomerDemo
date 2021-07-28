@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://ServiceImpl" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://ServiceImpl" xmlns:intf="http://ServiceImpl" xmlns:tns1="http://entity" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://ServiceImpl" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://entity"/>
+   <element name="getUser">
+    <complexType>
+     <sequence>
+      <element name="UserID" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getUserResponse">
+    <complexType>
+     <sequence>
+      <element name="getUserReturn" type="tns1:UserEntity"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAccount">
+    <complexType>
+     <sequence>
+      <element name="accountID" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAccountResponse">
+    <complexType>
+     <sequence>
+      <element name="getAccountReturn" type="tns1:AccountEntity"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getCustomerByAccount">
+    <complexType>
+     <sequence>
+      <element name="accountID" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getCustomerByAccountResponse">
+    <complexType>
+     <sequence>
+      <element name="getCustomerByAccountReturn" type="tns1:CustomerEntity"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getCustomerByUser">
+    <complexType>
+     <sequence>
+      <element name="userID" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getCustomerByUserResponse">
+    <complexType>
+     <sequence>
+      <element name="getCustomerByUserReturn" type="tns1:CustomerEntity"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getCustomerByMSISDN">
+    <complexType>
+     <sequence>
+      <element name="MSISDN" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getCustomerByMSISDNResponse">
+    <complexType>
+     <sequence>
+      <element name="getCustomerByMSISDNReturn" type="tns1:CustomerEntity"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://entity" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="UserEntity">
+    <sequence>
+     <element name="address" nillable="true" type="xsd:string"/>
+     <element name="firstName" nillable="true" type="xsd:string"/>
+     <element name="language" nillable="true" type="xsd:string"/>
+     <element name="lastName" nillable="true" type="xsd:string"/>
+     <element name="userID" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="AccountEntity">
+    <sequence>
+     <element name="accountID" type="xsd:int"/>
+     <element name="expiryDate" nillable="true" type="xsd:string"/>
+     <element name="planID" nillable="true" type="xsd:string"/>
+     <element name="remainingBalance" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="CustomerEntity">
+    <sequence>
+     <element name="MSISDN" type="xsd:int"/>
+     <element name="UUID" nillable="true" type="xsd:string"/>
+     <element name="accountID" nillable="true" type="tns1:AccountEntity"/>
+     <element name="userID" nillable="true" type="tns1:UserEntity"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getUserResponse">
+
+      <wsdl:part element="impl:getUserResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCustomerByUserResponse">
+
+      <wsdl:part element="impl:getCustomerByUserResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCustomerByAccountRequest">
+
+      <wsdl:part element="impl:getCustomerByAccount" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCustomerByAccountResponse">
+
+      <wsdl:part element="impl:getCustomerByAccountResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCustomerByMSISDNRequest">
+
+      <wsdl:part element="impl:getCustomerByMSISDN" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCustomerByUserRequest">
+
+      <wsdl:part element="impl:getCustomerByUser" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getUserRequest">
+
+      <wsdl:part element="impl:getUser" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAccountRequest">
+
+      <wsdl:part element="impl:getAccount" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCustomerByMSISDNResponse">
+
+      <wsdl:part element="impl:getCustomerByMSISDNResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAccountResponse">
+
+      <wsdl:part element="impl:getAccountResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="Service">
+
+      <wsdl:operation name="getUser">
+
+         <wsdl:input message="impl:getUserRequest" name="getUserRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getUserResponse" name="getUserResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAccount">
+
+         <wsdl:input message="impl:getAccountRequest" name="getAccountRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAccountResponse" name="getAccountResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getCustomerByAccount">
+
+         <wsdl:input message="impl:getCustomerByAccountRequest" name="getCustomerByAccountRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getCustomerByAccountResponse" name="getCustomerByAccountResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getCustomerByUser">
+
+         <wsdl:input message="impl:getCustomerByUserRequest" name="getCustomerByUserRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getCustomerByUserResponse" name="getCustomerByUserResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getCustomerByMSISDN">
+
+         <wsdl:input message="impl:getCustomerByMSISDNRequest" name="getCustomerByMSISDNRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getCustomerByMSISDNResponse" name="getCustomerByMSISDNResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="ServiceSoapBinding" type="impl:Service">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getUserRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getUserResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAccount">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAccountRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAccountResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getCustomerByAccount">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getCustomerByAccountRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getCustomerByAccountResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getCustomerByUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getCustomerByUserRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getCustomerByUserResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getCustomerByMSISDN">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getCustomerByMSISDNRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getCustomerByMSISDNResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="ServiceService">
+
+      <wsdl:port binding="impl:ServiceSoapBinding" name="Service">
+
+         <wsdlsoap:address location="http://localhost:8080/Customer/services/Service"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

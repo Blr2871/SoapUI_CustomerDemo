@@ -1,0 +1,65 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ServiceService WSDL service -->
+
+  <service name="Service" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://ServiceImpl"/>
+      <parameter name="wsdlServiceElement" value="ServiceService"/>
+      <parameter name="schemaQualified" value="http://ServiceImpl,http://entity"/>
+      <parameter name="wsdlServicePort" value="Service"/>
+      <parameter name="className" value="ServiceImpl.ServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="Service"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getUser" qname="operNS:getUser" xmlns:operNS="http://ServiceImpl" returnQName="retNS:getUserReturn" xmlns:retNS="http://ServiceImpl" returnType="rtns:UserEntity" xmlns:rtns="http://entity" soapAction="" >
+        <parameter qname="pns:UserID" xmlns:pns="http://ServiceImpl" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getAccount" qname="operNS:getAccount" xmlns:operNS="http://ServiceImpl" returnQName="retNS:getAccountReturn" xmlns:retNS="http://ServiceImpl" returnType="rtns:AccountEntity" xmlns:rtns="http://entity" soapAction="" >
+        <parameter qname="pns:accountID" xmlns:pns="http://ServiceImpl" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getCustomerByAccount" qname="operNS:getCustomerByAccount" xmlns:operNS="http://ServiceImpl" returnQName="retNS:getCustomerByAccountReturn" xmlns:retNS="http://ServiceImpl" returnType="rtns:CustomerEntity" xmlns:rtns="http://entity" soapAction="" >
+        <parameter qname="pns:accountID" xmlns:pns="http://ServiceImpl" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getCustomerByUser" qname="operNS:getCustomerByUser" xmlns:operNS="http://ServiceImpl" returnQName="retNS:getCustomerByUserReturn" xmlns:retNS="http://ServiceImpl" returnType="rtns:CustomerEntity" xmlns:rtns="http://entity" soapAction="" >
+        <parameter qname="pns:userID" xmlns:pns="http://ServiceImpl" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getCustomerByMSISDN" qname="operNS:getCustomerByMSISDN" xmlns:operNS="http://ServiceImpl" returnQName="retNS:getCustomerByMSISDNReturn" xmlns:retNS="http://ServiceImpl" returnType="rtns:CustomerEntity" xmlns:rtns="http://entity" soapAction="" >
+        <parameter qname="pns:MSISDN" xmlns:pns="http://ServiceImpl" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="getCustomerByUser getCustomerByAccount getUser getAccount getCustomerByMSISDN"/>
+
+      <typeMapping
+        xmlns:ns="http://entity"
+        qname="ns:UserEntity"
+        type="java:entity.UserEntity"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://entity"
+        qname="ns:AccountEntity"
+        type="java:entity.AccountEntity"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://entity"
+        qname="ns:CustomerEntity"
+        type="java:entity.CustomerEntity"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
